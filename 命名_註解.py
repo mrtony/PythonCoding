@@ -46,3 +46,33 @@ def calculate_monthly_payment(principal: float, interest_rate: float, loan_term_
                       ((1 + monthly_interest_rate) ** number_of_payments - 1)
 
     return round(monthly_payment, 2)
+
+def calculate_monthly_payment2(principal: float, interest_rate: float, loan_term_years: int) -> float:
+    """
+    Calculates the monthly payment for a fixed-rate loan.
+
+    參數:
+        principal: The total amount borrowed (float).
+        interest_rate: The annual interest rate (as a decimal, float).
+        loan_term_years: The loan term in years (int).
+
+    返回:
+        The monthly payment amount (float).
+
+    異常:
+        ValueError: If any of the inputs are negative or zero.
+
+    範例:
+        >>> calculate_monthly_payment(100000, 0.05, 30)
+        536.82
+    """
+    if principal <= 0 or interest_rate <= 0 or loan_term_years <= 0:
+        raise ValueError("All input values must be positive.")
+
+    monthly_interest_rate = interest_rate / 12
+    number_of_payments = loan_term_years * 12
+
+    monthly_payment = principal * (monthly_interest_rate * (1 + monthly_interest_rate) ** number_of_payments) / \
+                      ((1 + monthly_interest_rate) ** number_of_payments - 1)
+
+    return round(monthly_payment, 2)
